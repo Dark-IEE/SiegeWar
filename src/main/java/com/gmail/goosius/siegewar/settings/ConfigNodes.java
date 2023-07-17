@@ -521,6 +521,8 @@ public enum ConfigNodes {
 	SIEGE_FORCED_TOGGLES(
 			"war.siege.forced_siege_toggles",
 			"",
+			"",
+			"",
 			"############################################################",
 			"# +------------------------------------------------------+ #",
 			"# |                   Forced Toggles                      | #",
