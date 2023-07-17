@@ -1,7 +1,12 @@
 package com.gmail.goosius.siegewar.listeners;
 
 import com.gmail.goosius.siegewar.playeractions.DestroyBlock;
+import com.palmergames.bukkit.towny.event.MobRemovalEvent;
+import com.palmergames.bukkit.towny.event.actions.TownyExplodingBlocksEvent;
+import com.palmergames.bukkit.towny.event.damage.TownyExplosionDamagesEntityEvent;
+import com.palmergames.bukkit.towny.event.mobs.MobSpawnRemovalEvent;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
+import com.palmergames.bukkit.towny.listeners.TownyEntityListener;
 import com.palmergames.bukkit.towny.object.Translatable;
 
 import org.bukkit.event.EventHandler;
@@ -15,6 +20,7 @@ import com.gmail.goosius.siegewar.utils.SiegeWarDistanceUtil;
 import com.palmergames.bukkit.towny.event.actions.TownyBuildEvent;
 import com.palmergames.bukkit.towny.event.actions.TownyBurnEvent;
 import com.palmergames.bukkit.towny.event.actions.TownyDestroyEvent;
+import org.bukkit.event.block.BlockExplodeEvent;
 
 /**
  * 
@@ -62,6 +68,47 @@ public class SiegeWarActionListener implements Listener {
 	public void onBurn(TownyBurnEvent event) {
 		if (SiegeWarSettings.getWarSiegeEnabled() && SiegeWarBlockUtil.isBlockNearAnActiveSiegeBanner(event.getBlock())) {
 			event.setCancelled(true);
+			return;
+		}
+
+		if (SiegeWarSettings.getWarSiegeEnabled() && SiegeWarSettings.isForcedFireInSiegesEnabled()) {
+			if (!SiegeWarDistanceUtil.isInANonBesiegedTown(event.getLocation()) || SiegeWarDistanceUtil.isLocationInActiveSiegeZone(event.getLocation())) {
+				event.setCancelled(false);
+			}
+		}
+	}
+
+	@EventHandler (ignoreCancelled = true)
+	public void onCheckMobs(MobRemovalEvent event) {
+		if (SiegeWarSettings.getWarSiegeEnabled() && SiegeWarSettings.isForcedMobsInSiegesEnabled()) {
+			if (!SiegeWarDistanceUtil.isInANonBesiegedTown(event.getEntity().getLocation()) || SiegeWarDistanceUtil.isLocationInActiveSiegeZone(event.getEntity().getLocation())) {
+				event.setCancelled(false);
+			}
+		}
+	}
+	@EventHandler (ignoreCancelled = true)
+	public void onSpawnMobs(MobSpawnRemovalEvent event) {
+		if (SiegeWarSettings.getWarSiegeEnabled() && SiegeWarSettings.isForcedMobsInSiegesEnabled()) {
+			if (!SiegeWarDistanceUtil.isInANonBesiegedTown(event.getEntity().getLocation()) || SiegeWarDistanceUtil.isLocationInActiveSiegeZone(event.getEntity().getLocation())) {
+				event.setCancelled(false);
+			}
+		}
+	}
+
+	@EventHandler (ignoreCancelled = true)
+	public void onExplodeEntity(TownyExplosionDamagesEntityEvent event) {
+		if (SiegeWarSettings.getWarSiegeEnabled() && SiegeWarSettings.isForcedExplosionsInSiegesEnabled()) {
+			if (!SiegeWarDistanceUtil.isInANonBesiegedTown(event.getLocation()) || SiegeWarDistanceUtil.isLocationInActiveSiegeZone(event.getLocation())) {
+				event.setCancelled(false);
+			}
+		}
+	}
+	@EventHandler (ignoreCancelled = true)
+	public void onExplodeBlock(BlockExplodeEvent event) {
+		if (SiegeWarSettings.getWarSiegeEnabled() && SiegeWarSettings.isForcedExplosionsInSiegesEnabled()) {
+			if (!SiegeWarDistanceUtil.isInANonBesiegedTown(event.getBlock().getLocation()) || SiegeWarDistanceUtil.isLocationInActiveSiegeZone(event.getBlock().getLocation())) {
+				event.setCancelled(false);
+			}
 		}
 	}
 

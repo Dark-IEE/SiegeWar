@@ -517,6 +517,34 @@ public enum ConfigNodes {
 			"true",
 			"",
 			"# If enabled, a firework will get spawned whenever a player dies inside a siege zone."),
+
+	SIEGE_FORCED_TOGGLES(
+			"war.siege.forced_siege_toggles",
+			"",
+			"############################################################",
+			"# +------------------------------------------------------+ #",
+			"# |                   Forced Toggles                      | #",
+			"# +------------------------------------------------------+ #",
+			"############################################################",
+			""),
+	SIEGE_FORCED_TOGGLES_FIRE(
+			"war.siege.forced_siege_toggles.enable_fire",
+			"false",
+			"",
+	"# If enabled, fire will be turned on everywhere in the besieged town."
+	),
+	SIEGE_FORCED_TOGGLES_MOBS(
+			"war.siege.forced_siege_toggles.enable_mobs",
+			"false",
+			"",
+			"# If enabled, mobs will be turned on everywhere in the besieged town."
+	),
+	SIEGE_FORCED_TOGGLES_EXPLOSIONS(
+			"war.siege.forced_siege_toggles.enable_explosions",
+			"false",
+			"",
+			"# If enabled, explosions will be turned on everywhere in the besieged town."
+	),
 	PEACEFUL_TOWNS(
 			"peaceful_towns",
 			"",

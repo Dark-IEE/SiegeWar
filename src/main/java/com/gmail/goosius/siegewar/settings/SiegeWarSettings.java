@@ -558,4 +558,14 @@ public class SiegeWarSettings {
 	public static boolean isBattleCommandersEnabled() {
 		return Settings.getBoolean(ConfigNodes.BATTLE_COMMANDERS_ENABLED);
 	}
+
+	public static boolean isForcedFireInSiegesEnabled() {
+		return Settings.getBoolean(ConfigNodes.SIEGE_FORCED_TOGGLES_FIRE);
+	}
+	public static boolean isForcedExplosionsInSiegesEnabled() {
+		return Settings.getBoolean(ConfigNodes.SIEGE_FORCED_TOGGLES_EXPLOSIONS);
+	}
+	public static boolean isForcedMobsInSiegesEnabled() {
+		return Settings.getBoolean(ConfigNodes.SIEGE_FORCED_TOGGLES_MOBS);
+	}
 }
